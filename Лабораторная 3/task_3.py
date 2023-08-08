@@ -1,24 +1,23 @@
 # TODO  Напишите функцию count_letters
-
 def count_letters(text):
-    dictionary = {}              # Создадим пустой словарь
-    length = 0
-    lower_text = text.lower()    # Преобразуем все символы в тексте в строчные
-    for symbol in lower_text:    # Цикл обхода каждого символа в тексте
-        if symbol.isalpha():     # Если текущий символ является буквой, тогда
-            length += 1
-            count = lower_text.count(symbol)  # в переменную count кладем результат вхождения буквы в текст (метод - count)
-            dictionary[symbol] = count  # добавляем букву в словарь вместе с переменной count
-    return dictionary, length
+    dictionary = {}                                             # создадим пустой словарь
+    length = 0                                                  # счетчик для хранения количества букв в тексте
+    lower_text = text.lower()                                   # переведем все символы в нижний регистр и положим в новую переменную
+    for symbol in lower_text:                                   # для каждого символа в новой переменной:
+        if symbol.isalpha():                                        # если символ является буквой, тогда:
+            length += 1                                                 # увеличиваем счетчик на единицу и
+            dictionary[symbol] = dictionary.get(symbol, 0) + 1          # добавляем в словарь символ (ключ), а если символ уже есть икрементим значение на единицу
+    return dictionary, length                                   # возвращаем словарь и счетчик
+
 
 # TODO Напишите функцию calculate_frequency
 def calculate_frequency(dict, size):
-    new_dictionary = {}
-    for symbol in dict:
-        frequency = dict.get(symbol) / size
-        frequency = round(frequency, 2)
-        new_dictionary[symbol] = frequency
-    return new_dictionary
+    new_dictionary = {}                                         # создадим новый пустой словарь
+    for symbol in dict:                                         # для каждого символа в словаре (словарь из первой функции полученный аргумент):
+        frequency = dict.get(symbol) / size                         # вычисляем частоту буквы
+        frequency = round(frequency, 2)                             # округляем частоту
+        new_dictionary[symbol] = frequency                          # добавляем в новый словарь букву (ключ) и ее частоту (значение)
+    return new_dictionary                                       # возвращаем словарь
 
 main_str = """
 У лукоморья дуб зелёный;
@@ -56,9 +55,10 @@ main_str = """
 Свои мне сказки говорил.
 """
 
-dictionary = (count_letters(main_str)[0])
-length = (count_letters(main_str)[1])
-
-print(calculate_frequency(dictionary, length))
+dictionary = (count_letters(main_str)[0])                          # создаем переменную и присваиваем ей возвращенный из первой функции словарь
+length = (count_letters(main_str)[1])                              # создаем переменную и присваиваем ей возвращенный из первой функции счетчик
+new_dictionary = calculate_frequency(dictionary, length)           # запуск второй функции и сохранение значений в новом словаре
 
 # TODO Распечатайте в столбик букву и её частоту в тексте
+for key, value in new_dictionary.items():                          # обход нового словаря для получения все пар ключ-значение
+  print("{0}: {1:.2f}".format(key, value))                         # вывод результатов
