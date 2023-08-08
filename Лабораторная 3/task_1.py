@@ -1,10 +1,9 @@
 # TODO Напишите функцию для поиска индекса товара
 def search_items(list_of_items, item):
-    for fruit in list_of_items:
-        try:
-            return list_of_items.index(item)
-        except ValueError:
-            return None
+    try:
+        return list_of_items.index(item)
+    except ValueError:
+        return None
 
 
 items_list = ['яблоко', 'банан', 'апельсин', 'груша', 'киви', 'банан']
